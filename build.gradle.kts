@@ -3,11 +3,5 @@ plugins {
 	alias(libs.plugins.android.kotlin) apply false
 	alias(libs.plugins.ksp)
 	alias(libs.plugins.realm) apply false
-}
-
-buildscript {
-	dependencies {
-		classpath(libs.google.dagger.hilt.plugin)
-	}
-
+	alias(libs.plugins.google.dagger.hilt.android) apply false
 }

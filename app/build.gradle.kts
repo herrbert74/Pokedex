@@ -4,39 +4,46 @@ plugins {
 	alias(libs.plugins.android.application)
 	alias(libs.plugins.android.kotlin)
 	alias(libs.plugins.ksp)
-	id("dagger.hilt.android.plugin")
-	kotlin("plugin.serialization") version libs.versions.kotlin
+	alias(libs.plugins.google.dagger.hilt.android)
+	alias(libs.plugins.realm)
 }
 
 android {
+
 	namespace = "com.zsoltbertalan.pokedex"
-	compileSdk = 34
 
 	defaultConfig {
 		applicationId = "com.zsoltbertalan.pokedex"
+		versionCode = libs.versions.versionCode.get().toInt()
+		versionName = libs.versions.versionName.toString()
+		vectorDrawables.useSupportLibrary = true
 		minSdk = 24
+		compileSdk = 34
 		targetSdk = 34
-		versionCode = 1
-		versionName = "1.0"
-
-		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-		vectorDrawables {
-			useSupportLibrary = true
-		}
+		testInstrumentationRunner = "com.zsoltbertalan.pokedex.PokedexAndroidJUnitRunner"
 	}
 
 	buildTypes {
-		release {
-			isMinifyEnabled = false
-			proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+
+		getByName("release") {
+			isDebuggable = false
+			isMinifyEnabled = true
+			proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
 		}
+
+		getByName("debug") {
+			isMinifyEnabled = false
+		}
+
 	}
+
 	compileOptions {
 		sourceCompatibility = JavaVersion.VERSION_17
 		targetCompatibility = JavaVersion.VERSION_17
 	}
 
 	buildFeatures {
+		buildConfig = true
 		compose = true
 	}
 
@@ -49,7 +56,6 @@ android {
 
 	packaging {
 		resources.excludes.add("MANIFEST.MF")
-		resources.excludes.add("META-INF/{AL2.0,LGPL2.1}")
 		resources.excludes.add("META-INF/LICENSE")
 		resources.excludes.add("META-INF/LICENSE.txt")
 		resources.excludes.add("META-INF/LICENSE.md")
@@ -63,6 +69,7 @@ android {
 }
 
 dependencies {
+
 	implementation(libs.androidx.activity.compose)
 	implementation(libs.androidx.appcompat)
 	implementation(platform(libs.androidx.compose.bom))
@@ -76,20 +83,17 @@ dependencies {
 	implementation(libs.androidx.coreKtx)
 	implementation(libs.androidx.constraintLayout)
 	implementation(libs.androidx.navigation.uiKtx)
-	implementation(libs.androidx.navigation.fragment)
+	implementation(libs.androidx.lifecycle.runtime.compose)
+	implementation(libs.androidx.navigation.compose)
+	implementation(libs.androidx.hilt.navigation.compose)
 	implementation(libs.google.material)
 	implementation(libs.androidx.coreKtx)
-	implementation(libs.decompose.core)
-	implementation(libs.decompose.extensionsJetBrains)
 	implementation(libs.kotlinResult.result)
 	implementation(libs.kotlinResult.coroutines)
-	implementation(libs.mvikotlin.core)
-	implementation(libs.mvikotlin.coroutines)
-	implementation(libs.mvikotlin.main)
-	implementation(libs.mvikotlin.rx)
-	implementation(libs.mvikotlin.logging)
+	implementation(libs.kotlin.parcelize.runtime)
 	implementation(libs.squareUp.okhttp3.loggingInterceptor)
 	implementation(libs.timber)
+	implementation(libs.realm.base)
 
 	implementation(libs.google.gson)
 	implementation(libs.squareUp.retrofit2.retrofit)
@@ -117,8 +121,6 @@ dependencies {
 	testImplementation(libs.androidx.test.ext.jUnit)
 	testImplementation(libs.test.mockk.core)
 	testImplementation(libs.kotlinx.coroutines.test)
-	testImplementation(libs.mvikotlin.coroutines)
-	testImplementation(libs.essenty.stateKeeper.android)
 	testImplementation(libs.test.kotest.assertions.core)
 
 	debugRuntimeOnly(platform(libs.androidx.compose.bom))
@@ -143,9 +145,10 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-	kotlinOptions.freeCompilerArgs += "-opt-in=androidx.compose.ui.test.ExperimentalTestApi"
+	kotlinOptions.freeCompilerArgs += "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-	kotlinOptions.freeCompilerArgs += "-opt-in=kotlinx.coroutines.FlowPreview"
+	kotlinOptions.freeCompilerArgs += "-opt-in=androidx.compose.ui.test.ExperimentalTestApi"
 }
+
