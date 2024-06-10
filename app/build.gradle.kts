@@ -17,9 +17,9 @@ android {
 		versionCode = libs.versions.versionCode.get().toInt()
 		versionName = libs.versions.versionName.toString()
 		vectorDrawables.useSupportLibrary = true
-		minSdk = 24
-		compileSdk = 34
-		targetSdk = 34
+		minSdk = libs.versions.minSdkVersion.get().toInt()
+		compileSdk = libs.versions.compileSdkVersion.get().toInt()
+		targetSdk = libs.versions.targetSdkVersion.get().toInt()
 		testInstrumentationRunner = "com.zsoltbertalan.pokedex.PokedexAndroidJUnitRunner"
 	}
 
