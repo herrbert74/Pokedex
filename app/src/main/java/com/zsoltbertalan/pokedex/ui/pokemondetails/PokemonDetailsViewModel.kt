@@ -39,6 +39,7 @@ class PokemonDetailsViewModel @Inject constructor(
 				_state.update { uiState ->
 					when (result) {
 						is Ok -> {
+
 							uiState.copy(
 								pokemonDetails = result.value,
 								loading = false,

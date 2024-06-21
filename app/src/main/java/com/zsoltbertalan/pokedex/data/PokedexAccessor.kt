@@ -12,8 +12,8 @@ import com.zsoltbertalan.pokedex.ext.ApiResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Singleton
 
 @Singleton
@@ -23,14 +23,12 @@ class PokedexAccessor(
 	private val ioContext: CoroutineDispatcher,
 ) : PokedexRepository {
 
-	override suspend fun getAllPokemons(): Flow<ApiResult<List<Pokemon>>> =
-		withContext(ioContext) {
-			fetchCacheThenNetwork(
-				fetchFromLocal = { pokemonDataSource.getPokemons() },
-				makeNetworkRequest = { pokedexService.getPokemons() },
-				saveResponseData = { pokemons -> pokemonDataSource.insertPokemons(pokemons.toPokemonList()) }
-			)
-		}
+	override fun getAllPokemons(): Flow<ApiResult<List<Pokemon>>> =
+		fetchCacheThenNetwork(
+			fetchFromLocal = { pokemonDataSource.getPokemons() },
+			makeNetworkRequest = { pokedexService.getPokemons() },
+			saveResponseData = { pokemons -> pokemonDataSource.insertPokemons(pokemons.toPokemonList()) }
+		).flowOn(ioContext)
 
 	/**
 	 * @return a Flow of [PokemonDetails] Result, which is a composition of the Pokemon and its evolution, which in
@@ -38,8 +36,8 @@ class PokedexAccessor(
 	 * Due to the very limited API, most of the evolution is missing, so in these cases this function will return the
 	 * name and the image of the current pokemon as a fallback.
 	 */
-	override suspend fun getPokemonDetails(pokemonId: Int): Flow<ApiResult<PokemonDetails>> {
-		return withContext(ioContext) {
+	override fun getPokemonDetails(pokemonId: Int): Flow<ApiResult<PokemonDetails>> {
+		return flow<ApiResult<PokemonDetails>> {
 			val pokemon = pokemonDataSource.getPokemon(pokemonId)
 			val existingEvolutions = pokemonDataSource.getPokemons().first()?.filter {
 				pokemon.evolutions.contains(it.name)
@@ -51,7 +49,7 @@ class PokedexAccessor(
 					PokemonEvolution(evolution, pokemon.imageUrl)
 				}
 			}
-			return@withContext flowOf(Ok(PokemonDetails(pokemon, evolutions)))
-		}
+			emit(Ok(PokemonDetails(pokemon, evolutions)))
+		}.flowOn(ioContext)
 	}
 }
