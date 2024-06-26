@@ -36,6 +36,7 @@ import com.zsoltbertalan.pokedex.R
 import com.zsoltbertalan.pokedex.design.Dimens
 import com.zsoltbertalan.pokedex.design.PokedexTheme
 import com.zsoltbertalan.pokedex.design.PokedexTypography
+import com.zsoltbertalan.pokedex.domain.model.Failure
 import com.zsoltbertalan.pokedex.domain.model.Pokemon
 import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel.Sort.ALPHABETICAL
 import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel.Sort.HIT_POINTS
@@ -226,7 +227,7 @@ fun PokemonsScreen(
 @Composable
 private fun ErrorView(
 	innerPadding: PaddingValues,
-	throwable: Throwable?,
+	throwable: Failure?,
 	onReload: () -> Unit
 ) {
 	Column(
@@ -241,7 +242,7 @@ private fun ErrorView(
 			contentDescription = null
 		)
 		Text(
-			text = throwable?.message ?: "Something went wrong",
+			text = "Something went wrong",
 			modifier = Modifier
 				.fillMaxWidth()
 				.padding(Dimens.marginLarge)

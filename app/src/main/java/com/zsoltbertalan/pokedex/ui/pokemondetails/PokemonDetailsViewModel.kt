@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.zsoltbertalan.pokedex.domain.api.PokedexRepository
+import com.zsoltbertalan.pokedex.domain.model.Failure
 import com.zsoltbertalan.pokedex.domain.model.PokemonDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -58,7 +59,7 @@ class PokemonDetailsViewModel @Inject constructor(
 	data class UiState(
 		val loading: Boolean = false,
 		val pokemonDetails: PokemonDetails = PokemonDetails(),
-		val error: Throwable? = null
+		val error: Failure? = null
 	)
 
 }

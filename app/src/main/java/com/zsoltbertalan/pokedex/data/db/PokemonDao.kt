@@ -1,7 +1,7 @@
 package com.zsoltbertalan.pokedex.data.db
 
+import com.zsoltbertalan.pokedex.common.util.runCatchingUnit
 import com.zsoltbertalan.pokedex.domain.model.Pokemon
-import com.zsoltbertalan.pokedex.ext.apiRunCatching
 import io.realm.kotlin.Realm
 import io.realm.kotlin.UpdatePolicy
 import io.realm.kotlin.ext.query
@@ -19,7 +19,7 @@ class PokemonDao @Inject constructor(private val realm: Realm) : PokemonDataSour
 	}
 
 	override suspend fun insertPokemons(pokemons: List<Pokemon>) {
-		apiRunCatching {
+		runCatchingUnit {
 			realm.write {
 				pokemons.map { copyToRealm(it.toDbo(), UpdatePolicy.ALL) }
 			}

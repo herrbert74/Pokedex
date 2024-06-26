@@ -8,7 +8,6 @@ import com.zsoltbertalan.pokedex.testhelper.PokemonDtoMother
 import com.zsoltbertalan.pokedex.testhelper.PokemonMother
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -37,6 +36,7 @@ internal class PokedexAccessorTest {
 
 		coEvery { api.getPokemons() } returns apiResponse
 		coEvery { dataSource.getPokemons() } returns flowOf(PokemonMother.createPokemonList())
+		coEvery { dataSource.insertPokemons(any()) } returns Unit
 
 		val result = underTest.getAllPokemons().first()
 

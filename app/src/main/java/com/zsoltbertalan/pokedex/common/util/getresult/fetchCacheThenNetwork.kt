@@ -1,27 +1,29 @@
-package com.zsoltbertalan.pokedex.data
+package com.zsoltbertalan.pokedex.common.util.getresult
 
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.andThen
 import com.github.michaelbull.result.map
-import com.github.michaelbull.result.mapError
 import com.github.michaelbull.result.recoverIf
-import com.zsoltbertalan.pokedex.ext.ApiResult
-import com.zsoltbertalan.pokedex.ext.apiRunCatching
+import com.zsoltbertalan.pokedex.common.util.Outcome
+import com.zsoltbertalan.pokedex.common.util.getresult.STRATEGY.CACHE_FIRST_NETWORK_LATER
+import com.zsoltbertalan.pokedex.common.util.getresult.STRATEGY.CACHE_FIRST_NETWORK_ONCE
+import com.zsoltbertalan.pokedex.common.util.getresult.STRATEGY.CACHE_FIRST_NETWORK_SECOND
+import com.zsoltbertalan.pokedex.common.util.runCatchingApi
+import com.zsoltbertalan.pokedex.common.util.runCatchingUnit
+import com.zsoltbertalan.pokedex.domain.model.Failure
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import okhttp3.internal.http.HTTP_NOT_MODIFIED
-import retrofit2.HttpException
 import retrofit2.Response
 
 /**
  * A collection of generic Repository functions to handle common tasks like making network requests, fetching and
  * saving data from and to a database.
  *
- * Various caching strategies are handled by the different functions in this file (Not fully implemented yet).
+ * Various caching strategies are handled by the different functions in this folder.
  *
  * Based on Flower:
  * https://github.com/hadiyarajesh/flower/blob/master/flower-core/src/commonMain/kotlin/com/hadiyarajesh/flower_core/DBBoundResource.kt
@@ -50,32 +52,39 @@ import retrofit2.Response
  * @param shouldMakeNetworkRequest - Whether or not to make network request
  * @param makeNetworkRequest - A function to make network request and retrieve [REMOTE] data
  * @param saveResponseData - A function to save network reply coming in [REMOTE] format
+ * @param mapper - An extension function to convert [REMOTE] to [DOMAIN] format
+ * @param strategy - How to deal with network requests and results. See [STRATEGY]
  * @return Result<[DOMAIN]> type
  */
 inline fun <REMOTE, DOMAIN> fetchCacheThenNetwork(
 	crossinline fetchFromLocal: () -> Flow<DOMAIN?>,
 	crossinline shouldMakeNetworkRequest: (DOMAIN?) -> Boolean = { true },
 	crossinline makeNetworkRequest: suspend () -> REMOTE,
-	crossinline saveResponseData: suspend (REMOTE) -> Unit = { },
-) = flow<ApiResult<DOMAIN>> {
+	noinline saveResponseData: suspend (REMOTE) -> Unit = { },
+	crossinline mapper: REMOTE.() -> DOMAIN,
+	strategy: STRATEGY = CACHE_FIRST_NETWORK_SECOND,
+) = flow<Outcome<DOMAIN>> {
 
 	val localData = fetchFromLocal().first()
 	localData?.let { emit(Ok(it)) }
-	if (shouldMakeNetworkRequest(localData)) {
-		val result = apiRunCatching {
+
+	val networkOnlyOnceAndAlreadyCached = strategy == CACHE_FIRST_NETWORK_ONCE && localData != null
+
+	if (shouldMakeNetworkRequest(localData) && networkOnlyOnceAndAlreadyCached.not()) {
+
+		val result = runCatchingApi {
 			makeNetworkRequest()
 		}.andThen { dto ->
 			saveResponseData(dto)
 			Ok(dto)
-		}.andThen {
-			Ok(fetchFromLocal().first())
+		}.map {
+			it.mapper()
 		}.recoverIf(
 			{ _ -> localData != null },
 			{ null }
-		).mapError {
-			it
-		}
-		if (result is Err || (result is Ok && result.component1() != null)) {
+		)
+
+		if (shouldEmitNetworkResult(result, strategy, localData == null)) {
 			emitAll(
 				flowOf(
 					result.map { it!! }
@@ -83,6 +92,7 @@ inline fun <REMOTE, DOMAIN> fetchCacheThenNetwork(
 			)
 		}
 	}
+
 }
 
 /**
@@ -100,6 +110,8 @@ inline fun <REMOTE, DOMAIN> fetchCacheThenNetwork(
  * @param shouldMakeNetworkRequest - Whether or not to make network request
  * @param makeNetworkRequest - A function to make network request and retrieve [REMOTE] data wrapped in [retrofit2.Response]
  * @param saveResponseData - A function to save network reply coming in [REMOTE] format wrapped in [retrofit2.Response]
+ * @param mapper - An extension function to convert [REMOTE] to [DOMAIN] format
+ * @param strategy - How to deal with network requests and results. See [STRATEGY]
  * @return Result<[DOMAIN]> type
  */
 @Suppress("unused")
@@ -107,26 +119,33 @@ inline fun <REMOTE, DOMAIN> fetchCacheThenNetworkResponse(
 	crossinline fetchFromLocal: () -> Flow<DOMAIN?>,
 	crossinline shouldMakeNetworkRequest: (DOMAIN?) -> Boolean = { true },
 	crossinline makeNetworkRequest: suspend () -> Response<REMOTE>,
-	crossinline saveResponseData: suspend (Response<REMOTE>) -> Unit = { },
-) = flow<ApiResult<DOMAIN>> {
+	noinline saveResponseData: suspend (Response<REMOTE>) -> Unit = { },
+	crossinline mapper: REMOTE.() -> DOMAIN,
+	strategy: STRATEGY = CACHE_FIRST_NETWORK_SECOND,
+) = flow<Outcome<DOMAIN>> {
 
 	val localData = fetchFromLocal().first()
 	localData?.let { emit(Ok(it)) }
-	if (shouldMakeNetworkRequest(localData)) {
-		val result = apiRunCatching {
+	val networkOnlyOnceAndAlreadyCached = strategy == CACHE_FIRST_NETWORK_ONCE && localData != null
+	if (shouldMakeNetworkRequest(localData) && networkOnlyOnceAndAlreadyCached.not()) {
+
+		val result = runCatchingApi {
 			makeNetworkRequest()
-		}.andThen { dto ->
-			saveResponseData(dto)
-			Ok(dto)
-		}.andThen {
-			Ok(fetchFromLocal().first())
+		}.andThen { response ->
+			if (response.isSuccessful) {
+				runCatchingUnit { saveResponseData(response) }
+				Ok(response.body())
+			} else {
+				Err(response.handleCode())
+			}
+		}.map {
+			it?.mapper()
 		}.recoverIf(
-			{ throwable -> (throwable as? HttpException)?.code() == HTTP_NOT_MODIFIED || localData != null },
+			{ failure -> failure == Failure.NotModified || localData != null },
 			{ null }
-		).mapError {
-			it
-		}
-		if (result is Err || (result is Ok && result.component1() != null)) {
+		)
+
+		if (shouldEmitNetworkResult(result, strategy, localData == null)) {
 			emitAll(
 				flowOf(
 					result.map { it!! }
@@ -135,4 +154,35 @@ inline fun <REMOTE, DOMAIN> fetchCacheThenNetworkResponse(
 		}
 	}
 
+}
+
+fun <DOMAIN> shouldEmitNetworkResult(
+	result: Outcome<DOMAIN?>,
+	strategy: STRATEGY,
+	isLocalNull: Boolean
+): Boolean {
+	return when (strategy) {
+		CACHE_FIRST_NETWORK_LATER -> isLocalNull
+		else -> result is Err || (result is Ok && result.component1() != null)
+	}
+}
+
+/**
+ * Cache first strategies to deal with network requests and results.
+ */
+enum class STRATEGY {
+	/**
+	 * Always emit network result.
+	 */
+	CACHE_FIRST_NETWORK_SECOND,
+
+	/**
+	 * Save but do not emit network result, unless there is no cache result.
+	 */
+	CACHE_FIRST_NETWORK_LATER,
+
+	/**
+	 * Make network request only if there is no cache result.
+	 */
+	CACHE_FIRST_NETWORK_ONCE,
 }

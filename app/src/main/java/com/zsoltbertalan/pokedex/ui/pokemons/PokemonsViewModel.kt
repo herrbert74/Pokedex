@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.zsoltbertalan.pokedex.domain.api.PokedexRepository
+import com.zsoltbertalan.pokedex.domain.model.Failure
 import com.zsoltbertalan.pokedex.domain.model.Pokemon
 import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel.Sort.ALPHABETICAL
 import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel.Sort.TYPE
@@ -86,7 +87,8 @@ class PokemonsViewModel @Inject constructor(private val pokedexRepository: Poked
 				uiState.copy(
 					processedPokemons = uiState.pokemons,
 					sort = Sort.NONE,
-					sortOrder = NONE
+					sortOrder = NONE,
+
 				)
 			}
 		} else {
@@ -95,7 +97,8 @@ class PokemonsViewModel @Inject constructor(private val pokedexRepository: Poked
 				uiState.copy(
 					processedPokemons = processedPokemons,
 					sort = Sort.NONE,
-					sortOrder = NONE
+					sortOrder = NONE,
+					type = newType,
 				)
 			}
 		}
@@ -107,7 +110,8 @@ class PokemonsViewModel @Inject constructor(private val pokedexRepository: Poked
 				uiState.copy(
 					processedPokemons = uiState.pokemons,
 					sort = Sort.NONE,
-					sortOrder = NONE
+					sortOrder = NONE,
+					region = ""
 				)
 			}
 		} else {
@@ -116,7 +120,8 @@ class PokemonsViewModel @Inject constructor(private val pokedexRepository: Poked
 				uiState.copy(
 					processedPokemons = processedPokemons,
 					sort = Sort.NONE,
-					sortOrder = NONE
+					sortOrder = NONE,
+					region = newRegion,
 				)
 			}
 		}
@@ -133,7 +138,7 @@ class PokemonsViewModel @Inject constructor(private val pokedexRepository: Poked
 		val regions: List<String> = emptyList(),
 		val type: String = "",
 		val region: String = "",
-		val error: Throwable? = null
+		val error: Failure? = null
 	)
 
 	enum class Sort {
