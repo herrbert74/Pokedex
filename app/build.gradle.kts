@@ -3,6 +3,7 @@
 plugins {
 	alias(libs.plugins.android.application)
 	alias(libs.plugins.android.kotlin)
+	alias(libs.plugins.compose.compiler)
 	alias(libs.plugins.ksp)
 	alias(libs.plugins.google.dagger.hilt.android)
 	alias(libs.plugins.realm)
@@ -45,10 +46,6 @@ android {
 	buildFeatures {
 		buildConfig = true
 		compose = true
-	}
-
-	composeOptions {
-		kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
 	}
 
 	//Needed for Mockk
@@ -141,14 +138,13 @@ dependencies {
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-	kotlinOptions.freeCompilerArgs += "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
+	compilerOptions.freeCompilerArgs.add("-opt-in=androidx.compose.material3.ExperimentalMaterial3Api")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-	kotlinOptions.freeCompilerArgs += "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+	compilerOptions.freeCompilerArgs.add("-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-	kotlinOptions.freeCompilerArgs += "-opt-in=androidx.compose.ui.test.ExperimentalTestApi"
+	compilerOptions.freeCompilerArgs.add("-opt-in=androidx.compose.ui.test.ExperimentalTestApi")
 }
-

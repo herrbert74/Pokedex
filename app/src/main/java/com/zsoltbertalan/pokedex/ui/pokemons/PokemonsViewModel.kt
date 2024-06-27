@@ -2,8 +2,6 @@ package com.zsoltbertalan.pokedex.ui.pokemons
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.michaelbull.result.Err
-import com.github.michaelbull.result.Ok
 import com.zsoltbertalan.pokedex.domain.api.PokedexRepository
 import com.zsoltbertalan.pokedex.domain.model.Failure
 import com.zsoltbertalan.pokedex.domain.model.Pokemon
@@ -35,8 +33,8 @@ class PokemonsViewModel @Inject constructor(private val pokedexRepository: Poked
 			_state.update { it.copy(loading = true) }
 			pokedexRepository.getAllPokemons().collect { result ->
 				_state.update { uiState ->
-					when (result) {
-						is Ok -> {
+					when {
+						result.isOk -> {
 							val types = listOf("ALL").plus(result.value.associateBy { it.type }.keys)
 							val regions = listOf("ALL").plus(result.value.associateBy { it.region }.keys)
 							uiState.copy(
@@ -49,7 +47,7 @@ class PokemonsViewModel @Inject constructor(private val pokedexRepository: Poked
 							)
 						}
 
-						is Err -> uiState.copy(loading = false, error = result.error)
+						else -> uiState.copy(loading = false, error = result.error)
 					}
 				}
 			}

@@ -3,8 +3,6 @@ package com.zsoltbertalan.pokedex.ui.pokemondetails
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.michaelbull.result.Err
-import com.github.michaelbull.result.Ok
 import com.zsoltbertalan.pokedex.domain.api.PokedexRepository
 import com.zsoltbertalan.pokedex.domain.model.Failure
 import com.zsoltbertalan.pokedex.domain.model.PokemonDetails
@@ -38,8 +36,8 @@ class PokemonDetailsViewModel @Inject constructor(
 			_state.update { it.copy(loading = true) }
 			pokedexRepository.getPokemonDetails(pokemonId).collect { result ->
 				_state.update { uiState ->
-					when (result) {
-						is Ok -> {
+					when {
+						result.isOk -> {
 
 							uiState.copy(
 								pokemonDetails = result.value,
@@ -48,7 +46,7 @@ class PokemonDetailsViewModel @Inject constructor(
 							)
 						}
 
-						is Err -> uiState.copy(loading = false, error = result.error)
+						else -> uiState.copy(loading = false, error = result.error)
 					}
 				}
 

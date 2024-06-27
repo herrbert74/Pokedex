@@ -6,34 +6,34 @@ compileSdkVersion = "34"
 targetSdkVersion = "34"
 androidGradlePlugin = "8.3.2"
 #androidGradlePlugin = "7.3.1" # For IntelliJ plugin runIde
-kotlin = "1.9.23"
-ksp = "1.9.23-1.0.19"
-coroutines = "1.8.0"
+kotlin = "2.0.0"
+ksp = "2.0.0-1.0.22"
+coroutines = "1.8.1"
 serialization = "1.6.2"
 kotlinx-collections = "0.3.7"
 androidx-activity = "1.9.0"
-androidx-lifecycle = "2.7.0"
+androidx-lifecycle = "2.8.2"
 androidx-navigation = "2.7.7"
 androidx-hilt = "1.2.0"
 androidx-work = "2.9.0"
-androidx-test-core = "1.5.0"
-androidx-test-rules = "1.5.0"
-androidx-test-runner = "1.5.2"
-androidx-test-espresso = "3.5.1"
+androidx-test-core = "1.6.1"
+androidx-test-rules = "1.6.1"
+androidx-test-runner = "1.6.1"
+androidx-test-espresso = "3.6.1"
 androidx-compose-compiler = "1.5.12"
-androidx-compose-bom = "2024.05.00"
+androidx-compose-bom = "2024.06.00"
 #androidx-compose-material3 = "1.1.1" #This had search bar
 #androidx-compose-animation = "1.4.0" #For fixes since the bom
 #androidx-compose-foundation = "1.4.0" #For fixes since the bom
 #androidx-compose-runtime = "1.4.0" #For fixes since the bom
 androidx-compose-ui = "1.6.1" #For fixes since the bom
 google-dagger = "2.51"
-google-firebase-bom = "32.7.2"
+google-firebase-bom = "33.1.1"
 google-firebase-analytics = "21.2.0"
 google-firebase-crashlytics = "18.3.5"
 google-firebase-database = "31.2.3"
 google-firebase-config = "31.2.3"
-moshi = "1.15.0"
+moshi = "1.15.1"
 okhttp = "5.0.0-alpha.12"
 retrofit = "2.11.0"
 #facebook = "16.1.2"
@@ -42,19 +42,19 @@ mviKotlin = "3.2.1"
 decompose = "2.2.2"
 essenty = "1.3.0"
 parcelize-darwin = "0.1.4"
-jUnit5 = "5.9.3"
-mockk = "1.13.3" #1.13.4 issue: https://github.com/mockk/mockk/issues/1035
+jUnit5 = "5.10.2"
+mockk = "1.13.8" #1.13.4 issue: https://github.com/mockk/mockk/issues/1035
 mockmp = "1.14.0"
 kotest = "5.6.2"
-detekt = "1.22.0"
-kotlinResult = "1.1.18"
+detekt = "1.23.6"
+kotlinResult = "2.0.0"
 flowBinding = "1.2.0"
 ktor = "2.3.6"
 ktorfit = "1.12.0"
-koin = "3.4.3"
-multiplatform-settings = "1.0.0"
-realm = "1.14.1"
-skie = "0.6.1"
+koin = "3.5.3"
+multiplatform-settings = "1.1.1"
+realm = "2.0.0"
+skie = "0.8.2"
 babestudios-base = "3.0.0"
 
 [libraries]
@@ -62,10 +62,10 @@ babestudios-base = "3.0.0"
 androidGradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
 kotlinPlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlinAllOpenPlugin = { module = "org.jetbrains.kotlin:kotlin-allopen", version.ref = "kotlin" }
-googleServicesPlugin = "com.google.gms:google-services:4.4.1"
-firebaseCrashlyticsPlugin = "com.google.firebase:firebase-crashlytics-gradle:2.9.9"
-firebaseAppDistributionPlugin = "com.google.firebase:firebase-appdistribution-gradle:4.1.0"
-buildKonfig = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version = "0.13.3" }
+googleServicesPlugin = "com.google.gms:google-services:4.4.2"
+firebaseCrashlyticsPlugin = "com.google.firebase:firebase-crashlytics-gradle:3.0.2"
+firebaseAppDistributionPlugin = "com.google.firebase:firebase-appdistribution-gradle:5.0.0"
+buildKonfig = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version = "0.15.1" }
 google-dagger-hilt-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "google-dagger" }
 #navigationSafeArgsPlugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "androidx-navigation" }
 
@@ -92,38 +92,39 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 kotlinx-collections-immutable-jvm = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm", version.ref ="kotlinx-collections" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "serialization" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
-kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.5.0"
+kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.0"
 
 androidx-activity-activity = { module = "androidx.activity:activity", version.ref = "androidx-activity" }
 androidx-activity-activityKtx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
-androidx-annotation = "androidx.annotation:annotation:1.7.1"
-androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
-androidx-appCompatResources = "androidx.appcompat:appcompat-resources:1.6.1"
-androidx-browser = "androidx.browser:browser:1.7.0"
+androidx-annotation = "androidx.annotation:annotation:1.8.0"
+androidx-appcompat = "androidx.appcompat:appcompat:1.7.0"
+androidx-appCompatResources = "androidx.appcompat:appcompat-resources:1.7.0"
+androidx-browser = "androidx.browser:browser:1.8.0"
 androidx-cardView = "androidx.cardview:cardview:1.0.0"
 androidx-collection = "androidx.collection:collection:1.4.0"
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 androidx-constraintLayout-compose = "androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha13"
-androidx-core = "androidx.core:core:1.12.0" #Bundle
-androidx-coreKtx = "androidx.core:core-ktx:1.12.0" #Bundle
-androidx-datastore = "androidx.datastore:datastore-preferences:1.0.0"
-androidx-fragmentKtx = "androidx.fragment:fragment-ktx:1.6.2"
+androidx-core = "androidx.core:core:1.13.1" #Bundle
+androidx-coreKtx = "androidx.core:core-ktx:1.13.1" #Bundle
+androidx-datastore = "androidx.datastore:datastore-preferences:1.1.1"
+androidx-fragmentKtx = "androidx.fragment:fragment-ktx:1.8.1"
 androidx-media = "androidx.media:media:1.7.0"
-androidx-mediaRouter = "androidx.mediarouter:mediarouter:1.6.0"
+androidx-mediaRouter = "androidx.mediarouter:mediarouter:1.7.0"
 androidx-preferenceKtx = "androidx.preference:preference-ktx:1.2.1"
 androidx-recyclerView = "androidx.recyclerview:recyclerview:1.3.2"
 #androidx-splash = "androidx.core:core-splashscreen:1.0.1"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 androidx-swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-androidx-viewPager2 = "androidx.viewpager2:viewpager2:1.0.0"
-androidx-window = "androidx.window:window:1.2.0"
+androidx-viewPager2 = "androidx.viewpager2:viewpager2:1.1.0"
+androidx-window = "androidx.window:window:1.3.0"
 androidx-lifecycle-common = { module = "androidx.lifecycle:lifecycle-common", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref ="androidx-lifecycle" }
 androidx-lifecycle-runtimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodelKtx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
 androidx-navigation-common = { module = "androidx.navigation:navigation-common", version.ref = "androidx-navigation" }
 androidx-navigation-runtime = { module = "androidx.navigation:navigation-runtime", version.ref = "androidx-navigation" }
@@ -174,23 +175,23 @@ androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
 androidx-test-coreKtx = { module = "androidx.test:core-ktx", version.ref = "androidx-test-core" }
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test-runner" }
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test-rules" }
-androidx-test-orchestrator = "androidx.test:orchestrator:1.4.2"
+androidx-test-orchestrator = "androidx.test:orchestrator:1.5.0"
 androidx-test-uiAutomator = "androidx.test.uiautomator:uiautomator:2.3.0"
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-test-espresso" }
 androidx-test-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "androidx-test-espresso" }
 androidx-test-espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "androidx-test-espresso" }
-androidx-test-ext-jUnit = "androidx.test.ext:junit:1.1.5"
-androidx-test-ext-jUnitKtx = "androidx.test.ext:junit-ktx:1.1.5"
+androidx-test-ext-jUnit = "androidx.test.ext:junit:1.2.1"
+androidx-test-ext-jUnitKtx = "androidx.test.ext:junit-ktx:1.2.1"
 
-google-material = "com.google.android.material:material:1.11.0"
+google-material = "com.google.android.material:material:1.12.0"
 google-gson = "com.google.code.gson:gson:2.10.1"
 
 google-play-appUpdateKtx = "com.google.android.play:app-update-ktx:2.1.0"
-google-play-services-analytics = "com.google.android.gms:play-services-analytics:18.0.4"
-google-play-services-location = "com.google.android.gms:play-services-location:21.1.0"
-google-play-services-maps = "com.google.android.gms:play-services-maps:18.2.0"
+google-play-services-analytics = "com.google.android.gms:play-services-analytics:18.1.0"
+google-play-services-location = "com.google.android.gms:play-services-location:21.3.0"
+google-play-services-maps = "com.google.android.gms:play-services-maps:19.0.0"
 google-play-services-maps-compose = "com.google.maps.android:maps-compose:2.11.4"
-google-play-services-ads = "com.google.android.gms:play-services-ads:22.6.0"
+google-play-services-ads = "com.google.android.gms:play-services-ads:23.1.0"
 #google-play-services-auth = "com.google.android.gms:play-services-auth:20.2.0"
 #google-play-services-tagManager = "com.google.android.gms:play-services-tagmanager:18.0.1"
 #google-play-services-cast = "com.google.android.gms:play-services-cast-framework:21.1.0"
@@ -293,10 +294,10 @@ flowBinding-viewPager2 = { module = "io.github.reactivecircus.flowbinding:flowbi
 flowBinding-material = { module = "io.github.reactivecircus.flowbinding:flowbinding-material", version.ref = "flowBinding" }
 
 view-collapsingToolbar = "me.onebone:toolbar-compose:2.3.5"
-coil = "io.coil-kt:coil-compose:2.5.0"
+coil = "io.coil-kt:coil-compose:2.6.0"
 
 # Multiplatform
-uriKmp = "com.eygraber:uri-kmp:0.0.13"
+uriKmp = "com.eygraber:uri-kmp:0.0.16"
 
 test-jUnit = "junit:junit:4.13.2"
 test-robolectric = "org.robolectric:robolectric:4.11.1"
@@ -315,10 +316,6 @@ test-kotest-runner = { module = "io.kotest:kotest-runner-junit5", version.ref = 
 test-kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 test-kotest-assertions-shared = { module = "io.kotest:kotest-assertions-shared", version.ref = "kotest" }
 test-kotest-property = { module = "io.kotest:kotest-property", version.ref = "kotest" }
-#https://github.com/android/android-test/issues/1352
-#https://github.com/AdevintaSpain/Barista/issues/357
-test-hamcrest2 = "org.hamcrest:hamcrest:2.2"
-test-hamcrest = "org.hamcrest:hamcrest-core:1.3"
 
 logging = "org.lighthousegames:logging:1.3.0"
 timber = "com.jakewharton.timber:timber:5.0.1"
@@ -334,10 +331,11 @@ mockk-android = ["test-mockk-android", "test-mockk-core", "test-mockk-dsl"]
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "google-dagger" }
-crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.9" }
+crashlytics = { id = "com.google.firebase.crashlytics", version = "3.0.2" }
 
 # Multiplatform
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
