@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.zsoltbertalan.pokedex.design
+package com.zsoltbertalan.pokedex.presentation.design
 
 const val LIGHT_PRIMARY = 0xFF006D42
 const val LIGHT_ON_PRIMARY = 0xFFffffff

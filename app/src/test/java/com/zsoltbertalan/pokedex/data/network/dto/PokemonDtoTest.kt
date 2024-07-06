@@ -1,7 +1,7 @@
 package com.zsoltbertalan.pokedex.data.network.dto
 
+import com.zsoltbertalan.pokedex.common.testhelper.PokemonDtoMother
 import com.zsoltbertalan.pokedex.domain.model.Pokemon
-import com.zsoltbertalan.pokedex.testhelper.PokemonDtoMother
 import io.kotest.matchers.shouldBe
 import org.junit.Before
 import org.junit.Test

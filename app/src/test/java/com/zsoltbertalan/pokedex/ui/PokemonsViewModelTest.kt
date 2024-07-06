@@ -1,9 +1,9 @@
 package com.zsoltbertalan.pokedex.ui
 
 import com.github.michaelbull.result.Ok
+import com.zsoltbertalan.pokedex.common.testhelper.PokemonMother
 import com.zsoltbertalan.pokedex.domain.api.PokedexRepository
-import com.zsoltbertalan.pokedex.testhelper.PokemonMother
-import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel
+import com.zsoltbertalan.pokedex.presentation.ui.pokemons.PokemonsViewModel
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.coVerify

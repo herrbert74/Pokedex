@@ -3,7 +3,7 @@
 package com.zsoltbertalan.pokedex.data.network.dto
 
 import com.zsoltbertalan.pokedex.data.db.REGION_REGEX
-import com.zsoltbertalan.pokedex.data.mapNullInputList
+import com.zsoltbertalan.pokedex.data.repository.mapNullInputList
 import com.zsoltbertalan.pokedex.domain.model.Pokemon
 
 data class PokemonDto(

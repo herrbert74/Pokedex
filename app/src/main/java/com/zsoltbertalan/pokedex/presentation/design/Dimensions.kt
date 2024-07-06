@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.design
+package com.zsoltbertalan.pokedex.presentation.design
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp

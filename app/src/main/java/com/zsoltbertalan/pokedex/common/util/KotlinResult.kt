@@ -29,7 +29,7 @@ inline fun <T, V> T.runCatchingApi(block: T.() -> V) = runCatching(block)
 	.mapError { it.handle() }
 
 /**
- * [runCatching] version that handles all Throwables, and logs them.
+ * [runCatching] version that handles all [Throwable]s, and logs them.
  * Use it to save data for example, when return type is Unit.
  */
 inline fun <V> runCatchingUnit(block: () -> V) = runCatching(block)

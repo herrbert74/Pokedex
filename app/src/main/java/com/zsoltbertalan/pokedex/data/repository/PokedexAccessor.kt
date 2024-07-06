@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.data
+package com.zsoltbertalan.pokedex.data.repository
 
 import com.github.michaelbull.result.Ok
 import com.zsoltbertalan.pokedex.common.util.Outcome

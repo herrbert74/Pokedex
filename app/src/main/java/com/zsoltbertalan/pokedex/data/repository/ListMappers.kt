@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.data
+package com.zsoltbertalan.pokedex.data.repository
 
 // Non-nullable to Non-nullable
 inline fun <I, O> mapList(input: List<I>, mapSingle: (I) -> O): List<O> {

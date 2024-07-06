@@ -1,15 +1,15 @@
-package com.zsoltbertalan.pokedex.ui.pokemons
+package com.zsoltbertalan.pokedex.presentation.ui.pokemons
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zsoltbertalan.pokedex.domain.api.PokedexRepository
 import com.zsoltbertalan.pokedex.domain.model.Failure
 import com.zsoltbertalan.pokedex.domain.model.Pokemon
-import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel.Sort.ALPHABETICAL
-import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel.Sort.TYPE
-import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel.SortOrder.ASCENDING
-import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel.SortOrder.DESCENDING
-import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel.SortOrder.NONE
+import com.zsoltbertalan.pokedex.presentation.ui.pokemons.PokemonsViewModel.Sort.ALPHABETICAL
+import com.zsoltbertalan.pokedex.presentation.ui.pokemons.PokemonsViewModel.Sort.TYPE
+import com.zsoltbertalan.pokedex.presentation.ui.pokemons.PokemonsViewModel.SortOrder.ASCENDING
+import com.zsoltbertalan.pokedex.presentation.ui.pokemons.PokemonsViewModel.SortOrder.DESCENDING
+import com.zsoltbertalan.pokedex.presentation.ui.pokemons.PokemonsViewModel.SortOrder.NONE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

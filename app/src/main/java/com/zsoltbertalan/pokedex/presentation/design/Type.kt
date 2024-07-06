@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.design
+package com.zsoltbertalan.pokedex.presentation.design
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

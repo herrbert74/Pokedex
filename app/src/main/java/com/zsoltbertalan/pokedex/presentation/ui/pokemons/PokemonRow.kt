@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.ui.pokemons
+package com.zsoltbertalan.pokedex.presentation.ui.pokemons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,11 +23,11 @@ import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.zsoltbertalan.pokedex.R
-import com.zsoltbertalan.pokedex.design.Colors
-import com.zsoltbertalan.pokedex.design.Dimens
-import com.zsoltbertalan.pokedex.design.PokedexTypography
+import com.zsoltbertalan.pokedex.common.testhelper.PokemonMother
+import com.zsoltbertalan.pokedex.presentation.design.Colors
+import com.zsoltbertalan.pokedex.presentation.design.Dimens
+import com.zsoltbertalan.pokedex.presentation.design.PokedexTypography
 import com.zsoltbertalan.pokedex.domain.model.Pokemon
-import com.zsoltbertalan.pokedex.testhelper.PokemonMother
 import kotlinx.coroutines.Dispatchers
 
 @Composable

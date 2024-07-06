@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.di
+package com.zsoltbertalan.pokedex.common.async
 
 import android.content.Context
 import android.net.ConnectivityManager

@@ -1,11 +1,12 @@
 package com.zsoltbertalan.pokedex.data
 
 import com.github.michaelbull.result.Ok
+import com.zsoltbertalan.pokedex.common.testhelper.PokemonDtoMother
+import com.zsoltbertalan.pokedex.common.testhelper.PokemonMother
 import com.zsoltbertalan.pokedex.data.db.PokemonDataSource
 import com.zsoltbertalan.pokedex.data.network.PokedexService
 import com.zsoltbertalan.pokedex.data.network.dto.toPokemonList
-import com.zsoltbertalan.pokedex.testhelper.PokemonDtoMother
-import com.zsoltbertalan.pokedex.testhelper.PokemonMother
+import com.zsoltbertalan.pokedex.data.repository.PokedexAccessor
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.mockk

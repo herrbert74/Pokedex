@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.ui
+package com.zsoltbertalan.pokedex.presentation.ui
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedContentTransitionScope
@@ -10,10 +10,10 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.zsoltbertalan.pokedex.ui.pokemondetails.PokemonDetailsScreen
-import com.zsoltbertalan.pokedex.ui.pokemondetails.PokemonDetailsViewModel
-import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsScreen
-import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel
+import com.zsoltbertalan.pokedex.presentation.ui.pokemondetails.PokemonDetailsScreen
+import com.zsoltbertalan.pokedex.presentation.ui.pokemondetails.PokemonDetailsViewModel
+import com.zsoltbertalan.pokedex.presentation.ui.pokemons.PokemonsScreen
+import com.zsoltbertalan.pokedex.presentation.ui.pokemons.PokemonsViewModel
 
 @SuppressLint("RestrictedApi")
 @Composable

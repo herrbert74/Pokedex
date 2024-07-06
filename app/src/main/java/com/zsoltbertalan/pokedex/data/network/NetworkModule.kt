@@ -1,9 +1,8 @@
-package com.zsoltbertalan.pokedex.di
+package com.zsoltbertalan.pokedex.data.network
 
-import com.zsoltbertalan.pokedex.BASE_URL
-import com.zsoltbertalan.pokedex.data.PokedexAccessor
+import com.zsoltbertalan.pokedex.common.async.IoDispatcher
 import com.zsoltbertalan.pokedex.data.db.PokemonDataSource
-import com.zsoltbertalan.pokedex.data.network.PokedexService
+import com.zsoltbertalan.pokedex.data.repository.PokedexAccessor
 import com.zsoltbertalan.pokedex.domain.api.PokedexRepository
 import dagger.Module
 import dagger.Provides
@@ -15,6 +14,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+
+private const val BASE_URL: String = "https://dummyapi.online/"
 
 @Module
 @Suppress("unused")

@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.ui.pokemondetails
+package com.zsoltbertalan.pokedex.presentation.ui.pokemondetails
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

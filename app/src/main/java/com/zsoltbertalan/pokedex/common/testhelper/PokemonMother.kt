@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.testhelper
+package com.zsoltbertalan.pokedex.common.testhelper
 
 import com.zsoltbertalan.pokedex.domain.model.Pokemon
 

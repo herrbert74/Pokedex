@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.ui.pokemondetails
+package com.zsoltbertalan.pokedex.presentation.ui.pokemondetails
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -35,10 +35,10 @@ import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.zsoltbertalan.pokedex.R
-import com.zsoltbertalan.pokedex.design.Colors
-import com.zsoltbertalan.pokedex.design.Dimens
-import com.zsoltbertalan.pokedex.design.PokedexTheme
-import com.zsoltbertalan.pokedex.design.PokedexTypography
+import com.zsoltbertalan.pokedex.presentation.design.Colors
+import com.zsoltbertalan.pokedex.presentation.design.Dimens
+import com.zsoltbertalan.pokedex.presentation.design.PokedexTheme
+import com.zsoltbertalan.pokedex.presentation.design.PokedexTypography
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
 

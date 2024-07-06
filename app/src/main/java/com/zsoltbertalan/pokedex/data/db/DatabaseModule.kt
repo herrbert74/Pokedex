@@ -1,8 +1,5 @@
-package com.zsoltbertalan.pokedex.di
+package com.zsoltbertalan.pokedex.data.db
 
-import com.zsoltbertalan.pokedex.data.db.PokemonDbo
-import com.zsoltbertalan.pokedex.data.db.PokemonDao
-import com.zsoltbertalan.pokedex.data.db.PokemonDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -8,10 +8,10 @@ import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.zsoltbertalan.pokedex.di.IoDispatcher
-import com.zsoltbertalan.pokedex.di.MainDispatcher
+import com.zsoltbertalan.pokedex.common.async.IoDispatcher
+import com.zsoltbertalan.pokedex.common.async.MainDispatcher
 import com.zsoltbertalan.pokedex.domain.api.PokedexRepository
-import com.zsoltbertalan.pokedex.ui.PokedexActivity
+import com.zsoltbertalan.pokedex.presentation.ui.PokedexActivity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.CoroutineDispatcher

@@ -1,10 +1,10 @@
-package com.zsoltbertalan.pokedex.ui
+package com.zsoltbertalan.pokedex.presentation.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
-import com.zsoltbertalan.pokedex.design.PokedexTheme
+import com.zsoltbertalan.pokedex.presentation.design.PokedexTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

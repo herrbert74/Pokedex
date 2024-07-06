@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.ui
+package com.zsoltbertalan.pokedex.presentation.ui
 
 import androidx.annotation.StringRes
 import com.zsoltbertalan.pokedex.R

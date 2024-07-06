@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.ui.pokemons
+package com.zsoltbertalan.pokedex.presentation.ui.pokemons
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -33,14 +33,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.zsoltbertalan.pokedex.R
-import com.zsoltbertalan.pokedex.design.Dimens
-import com.zsoltbertalan.pokedex.design.PokedexTheme
-import com.zsoltbertalan.pokedex.design.PokedexTypography
+import com.zsoltbertalan.pokedex.presentation.design.Dimens
+import com.zsoltbertalan.pokedex.presentation.design.PokedexTheme
+import com.zsoltbertalan.pokedex.presentation.design.PokedexTypography
 import com.zsoltbertalan.pokedex.domain.model.Failure
 import com.zsoltbertalan.pokedex.domain.model.Pokemon
-import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel.Sort.ALPHABETICAL
-import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel.Sort.HIT_POINTS
-import com.zsoltbertalan.pokedex.ui.pokemons.PokemonsViewModel.Sort.TYPE
+import com.zsoltbertalan.pokedex.presentation.ui.pokemons.PokemonsViewModel.Sort.ALPHABETICAL
+import com.zsoltbertalan.pokedex.presentation.ui.pokemons.PokemonsViewModel.Sort.HIT_POINTS
+import com.zsoltbertalan.pokedex.presentation.ui.pokemons.PokemonsViewModel.Sort.TYPE
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable

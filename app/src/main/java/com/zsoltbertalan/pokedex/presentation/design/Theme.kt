@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.design
+package com.zsoltbertalan.pokedex.presentation.design
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
