@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.presentation.ui
+package com.zsoltbertalan.pokedex.presentation.navigation
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedContentTransitionScope

@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
 import com.zsoltbertalan.pokedex.presentation.design.PokedexTheme
+import com.zsoltbertalan.pokedex.presentation.navigation.NavHostContainer
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
