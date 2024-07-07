@@ -77,6 +77,49 @@ class PokemonsViewModelTest {
 
 	}
 
+	@Test
+	fun `when filter by type and no region then getPokemons returns only chosen types`() = runTest {
+
+		pokemonsViewModel.filterPokemonsByType("Fire")
+
+		pokemonsViewModel.state.value.processedPokemons.size shouldBe 3
+		pokemonsViewModel.state.value.processedPokemons[0].name shouldBe "name4"
+
+	}
+
+	@Test
+	fun `when filter by region and no type then getPokemons returns only Pokemons from chosen region`() = runTest {
+
+		pokemonsViewModel.filterPokemonsByRegion("")
+
+		pokemonsViewModel.state.value.processedPokemons.size shouldBe 2
+		pokemonsViewModel.state.value.processedPokemons[0].name shouldBe "name4"
+
+	}
+
+	@Test
+	fun `when filter by both region type then getPokemons returns only correctly filtered data`() =
+		runTest {
+
+			pokemonsViewModel.filterPokemonsByType("Fire")
+			pokemonsViewModel.filterPokemonsByRegion("Kanto region")
+
+		pokemonsViewModel.state.value.processedPokemons.size shouldBe 1
+		pokemonsViewModel.state.value.processedPokemons[0].name shouldBe "name7"
+
+	}
+
+	@Test
+	fun `when filter by region reset to all then getPokemons returns all pokemons`() = runTest {
+
+		pokemonsViewModel.filterPokemonsByRegion("Kanto region")
+		pokemonsViewModel.filterPokemonsByRegion("ALL")
+
+		pokemonsViewModel.state.value.processedPokemons.size shouldBe 8
+		pokemonsViewModel.state.value.processedPokemons[0].name shouldBe "name1"
+
+	}
+
 }
 
 

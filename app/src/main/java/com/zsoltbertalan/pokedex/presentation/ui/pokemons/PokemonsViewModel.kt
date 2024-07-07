@@ -81,16 +81,22 @@ class PokemonsViewModel @Inject constructor(private val pokedexRepository: Poked
 
 	fun filterPokemonsByType(newType: String) {
 		if (newType == "ALL") {
+			val processedPokemons = _state.value.pokemons.filter {
+				state.value.region == "ALL" || it.region == state.value.region
+			}
 			_state.update { uiState ->
 				uiState.copy(
-					processedPokemons = uiState.pokemons,
+					processedPokemons = processedPokemons,
 					sort = Sort.NONE,
 					sortOrder = NONE,
 
-				)
+					)
 			}
 		} else {
-			val processedPokemons = _state.value.pokemons.filter { it.type == newType }
+			val processedPokemons =
+				_state.value.pokemons.filter {
+					it.type == newType && (state.value.region == "ALL" || it.region == _state.value.region)
+				}
 			_state.update { uiState ->
 				uiState.copy(
 					processedPokemons = processedPokemons,
@@ -104,16 +110,22 @@ class PokemonsViewModel @Inject constructor(private val pokedexRepository: Poked
 
 	fun filterPokemonsByRegion(newRegion: String) {
 		if (newRegion == "ALL") {
+			val processedPokemons = state.value.pokemons.filter {
+				state.value.type == "ALL" || it.type == state.value.type
+			}
 			_state.update { uiState ->
 				uiState.copy(
-					processedPokemons = uiState.pokemons,
+					processedPokemons = processedPokemons,
 					sort = Sort.NONE,
 					sortOrder = NONE,
 					region = ""
 				)
 			}
 		} else {
-			val processedPokemons = _state.value.pokemons.filter { it.region == newRegion }
+			val processedPokemons =
+				_state.value.pokemons.filter {
+					it.region == newRegion && (state.value.type == "ALL" || it.type == state.value.type)
+				}
 			_state.update { uiState ->
 				uiState.copy(
 					processedPokemons = processedPokemons,
@@ -134,8 +146,8 @@ class PokemonsViewModel @Inject constructor(private val pokedexRepository: Poked
 		val sortOrder: SortOrder = NONE,
 		val types: List<String> = emptyList(),
 		val regions: List<String> = emptyList(),
-		val type: String = "",
-		val region: String = "",
+		val type: String = "ALL",
+		val region: String = "ALL",
 		val error: Failure? = null
 	)
 
