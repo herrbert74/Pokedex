@@ -4,7 +4,7 @@ versionName = "1.0"
 minSdkVersion = "21"
 compileSdkVersion = "34"
 targetSdkVersion = "34"
-androidGradlePlugin = "8.3.2"
+androidGradlePlugin = "8.5.0"
 #androidGradlePlugin = "7.3.1" # For IntelliJ plugin runIde
 kotlin = "2.0.0"
 ksp = "2.0.0-1.0.22"
@@ -184,7 +184,7 @@ androidx-test-ext-jUnit = "androidx.test.ext:junit:1.2.1"
 androidx-test-ext-jUnitKtx = "androidx.test.ext:junit-ktx:1.2.1"
 
 google-material = "com.google.android.material:material:1.12.0"
-google-gson = "com.google.code.gson:gson:2.10.1"
+google-gson = "com.google.code.gson:gson:2.11.0"
 
 google-play-appUpdateKtx = "com.google.android.play:app-update-ktx:2.1.0"
 google-play-services-analytics = "com.google.android.gms:play-services-analytics:18.1.0"

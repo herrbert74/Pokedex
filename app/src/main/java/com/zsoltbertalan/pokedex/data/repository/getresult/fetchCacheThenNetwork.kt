@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.common.util.getresult
+package com.zsoltbertalan.pokedex.data.repository.getresult
 
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
@@ -6,9 +6,9 @@ import com.github.michaelbull.result.andThen
 import com.github.michaelbull.result.map
 import com.github.michaelbull.result.recoverIf
 import com.zsoltbertalan.pokedex.common.util.Outcome
-import com.zsoltbertalan.pokedex.common.util.getresult.STRATEGY.CACHE_FIRST_NETWORK_LATER
-import com.zsoltbertalan.pokedex.common.util.getresult.STRATEGY.CACHE_FIRST_NETWORK_ONCE
-import com.zsoltbertalan.pokedex.common.util.getresult.STRATEGY.CACHE_FIRST_NETWORK_SECOND
+import com.zsoltbertalan.pokedex.data.repository.getresult.STRATEGY.CACHE_FIRST_NETWORK_LATER
+import com.zsoltbertalan.pokedex.data.repository.getresult.STRATEGY.CACHE_FIRST_NETWORK_ONCE
+import com.zsoltbertalan.pokedex.data.repository.getresult.STRATEGY.CACHE_FIRST_NETWORK_SECOND
 import com.zsoltbertalan.pokedex.common.util.runCatchingApi
 import com.zsoltbertalan.pokedex.common.util.runCatchingUnit
 import com.zsoltbertalan.pokedex.domain.model.Failure
@@ -57,12 +57,12 @@ import retrofit2.Response
  * @return Result<[DOMAIN]> type
  */
 inline fun <REMOTE, DOMAIN> fetchCacheThenNetwork(
-	crossinline fetchFromLocal: () -> Flow<DOMAIN?>,
-	crossinline shouldMakeNetworkRequest: (DOMAIN?) -> Boolean = { true },
-	crossinline makeNetworkRequest: suspend () -> REMOTE,
-	noinline saveResponseData: suspend (REMOTE) -> Unit = { },
-	crossinline mapper: REMOTE.() -> DOMAIN,
-	strategy: STRATEGY = CACHE_FIRST_NETWORK_SECOND,
+    crossinline fetchFromLocal: () -> Flow<DOMAIN?>,
+    crossinline shouldMakeNetworkRequest: (DOMAIN?) -> Boolean = { true },
+    crossinline makeNetworkRequest: suspend () -> REMOTE,
+    noinline saveResponseData: suspend (REMOTE) -> Unit = { },
+    crossinline mapper: REMOTE.() -> DOMAIN,
+    strategy: STRATEGY = CACHE_FIRST_NETWORK_SECOND,
 ) = flow<Outcome<DOMAIN>> {
 
 	val localData = fetchFromLocal().first()
@@ -116,12 +116,12 @@ inline fun <REMOTE, DOMAIN> fetchCacheThenNetwork(
  */
 @Suppress("unused")
 inline fun <REMOTE, DOMAIN> fetchCacheThenNetworkResponse(
-	crossinline fetchFromLocal: () -> Flow<DOMAIN?>,
-	crossinline shouldMakeNetworkRequest: (DOMAIN?) -> Boolean = { true },
-	crossinline makeNetworkRequest: suspend () -> Response<REMOTE>,
-	noinline saveResponseData: suspend (Response<REMOTE>) -> Unit = { },
-	crossinline mapper: REMOTE.() -> DOMAIN,
-	strategy: STRATEGY = CACHE_FIRST_NETWORK_SECOND,
+    crossinline fetchFromLocal: () -> Flow<DOMAIN?>,
+    crossinline shouldMakeNetworkRequest: (DOMAIN?) -> Boolean = { true },
+    crossinline makeNetworkRequest: suspend () -> Response<REMOTE>,
+    noinline saveResponseData: suspend (Response<REMOTE>) -> Unit = { },
+    crossinline mapper: REMOTE.() -> DOMAIN,
+    strategy: STRATEGY = CACHE_FIRST_NETWORK_SECOND,
 ) = flow<Outcome<DOMAIN>> {
 
 	val localData = fetchFromLocal().first()
@@ -157,9 +157,9 @@ inline fun <REMOTE, DOMAIN> fetchCacheThenNetworkResponse(
 }
 
 fun <DOMAIN> shouldEmitNetworkResult(
-	result: Outcome<DOMAIN?>,
-	strategy: STRATEGY,
-	isLocalNull: Boolean
+    result: Outcome<DOMAIN?>,
+    strategy: STRATEGY,
+    isLocalNull: Boolean
 ): Boolean {
 	return when (strategy) {
 		CACHE_FIRST_NETWORK_LATER -> isLocalNull

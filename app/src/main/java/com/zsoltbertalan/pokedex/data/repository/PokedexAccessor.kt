@@ -2,7 +2,7 @@ package com.zsoltbertalan.pokedex.data.repository
 
 import com.github.michaelbull.result.Ok
 import com.zsoltbertalan.pokedex.common.util.Outcome
-import com.zsoltbertalan.pokedex.common.util.getresult.fetchCacheThenNetwork
+import com.zsoltbertalan.pokedex.data.repository.getresult.fetchCacheThenNetwork
 import com.zsoltbertalan.pokedex.data.db.PokemonDataSource
 import com.zsoltbertalan.pokedex.data.network.PokedexService
 import com.zsoltbertalan.pokedex.data.network.dto.PokemonDto

@@ -14,15 +14,14 @@ An app to retrieve and display Pokemons from the https://docs.dummyapi.online/en
 
 * I use a monorepo for such a tiny project, however I used a few techniques to show how I can build an app that
   scales, even if they are an overkill as they are now.
-* The three main sections (module groups in a larger project) are **data**, **domain**, and **ui**.
+* The three main sections (module groups in a larger project) are **data**, **domain**, and **presentation**.
 * **Domain** does not depend on anything and contains the api interfaces, and the model classes. I do not use use 
   cases at the moment, otherwise I follow clean architecture.
 * **Data** implements the domain interfaces (repos) through the network, local and db packages or modules, and does not
   depend on anything else, apart from platform and third party libraries. Repository implementations are placed here 
   as well.
-* **Ui** uses the data implementations through dependency injection and the domain entities.
-* **Di** Dependency Injection through Dagger and Hilt. These might better be placed in their implementation packages.
-* Various extensions and utils were used from the **data** and **ext** packages.
+* **Presentation** layer uses the data implementations through dependency injection and the domain entities. It also contains the *navigation*, the *design* and the *ui* packages. 
+* **Dependency Injection** through Dagger and Hilt. The modules are placed in their implementation packages.
 
 ## Problems dealt with
 

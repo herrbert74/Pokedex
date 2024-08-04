@@ -1,4 +1,4 @@
-package com.zsoltbertalan.pokedex.common.util.getresult
+package com.zsoltbertalan.pokedex.data.repository.getresult
 
 import com.zsoltbertalan.pokedex.domain.model.Failure
 import okhttp3.internal.http.HTTP_BAD_REQUEST

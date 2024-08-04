@@ -4,7 +4,7 @@ import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.mapError
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.runCatching
-import com.zsoltbertalan.pokedex.common.util.getresult.handle
+import com.zsoltbertalan.pokedex.data.repository.getresult.handle
 import com.zsoltbertalan.pokedex.domain.model.Failure
 import timber.log.Timber
 
